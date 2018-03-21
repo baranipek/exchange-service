@@ -1,13 +1,13 @@
 package com.exchange.service.impl;
 
-import com.exchange.client.ExchangeRateClient;
+import com.exchange.client.ExchangeClient;
 import com.exchange.dto.ExchangeRateDto;
-import com.exchange.entity.ExchangeChangeEntity;
+import com.exchange.entity.ExchangeEntity;
 import com.exchange.exception.ExternalResourceNotFoundException;
 import com.exchange.helper.DateHelper;
-import com.exchange.mapper.ExchangeRateMapper;
-import com.exchange.repository.ExchangeRateRepository;
-import com.exchange.service.ExchangeRateService;
+import com.exchange.mapper.ExchangeMapper;
+import com.exchange.repository.ExchangeRepository;
+import com.exchange.service.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -16,19 +16,19 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class ExchangeRateServiceImpl implements ExchangeRateService {
+public class ExchangeServiceImpl implements ExchangeService {
 
-    private final ExchangeRateClient exchangeRateClient;
+    private final ExchangeClient exchangeRateClient;
 
-    private final ExchangeRateRepository repository;
+    private final ExchangeRepository repository;
 
-    private final ExchangeRateMapper mapper;
+    private final ExchangeMapper mapper;
 
     private final DateHelper dateHelper;
 
     @Autowired
-    public ExchangeRateServiceImpl(ExchangeRateClient exchangeRateClient, ExchangeRateRepository repository,
-                                   ExchangeRateMapper mapper, DateHelper dateHelper) {
+    public ExchangeServiceImpl(ExchangeClient exchangeRateClient, ExchangeRepository repository,
+                               ExchangeMapper mapper, DateHelper dateHelper) {
         this.exchangeRateClient = exchangeRateClient;
         this.repository = repository;
         this.mapper = mapper;
@@ -59,7 +59,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 
     @Override
     public List<ExchangeRateDto> getCurrency(String base, String symbol, Date startDate, Date endDate) {
-        List<ExchangeChangeEntity> exchangeRateResponse;
+        List<ExchangeEntity> exchangeRateResponse;
 
         if (StringUtils.isEmpty(startDate) || StringUtils.isEmpty(endDate)) {
             exchangeRateResponse = repository.findFirstByBaseAndSymbolOrderByCreatedTime(base, symbol);

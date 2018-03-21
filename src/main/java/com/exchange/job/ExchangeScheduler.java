@@ -1,11 +1,11 @@
 package com.exchange.job;
 
 import com.exchange.dto.ExchangeRateDto;
-import com.exchange.entity.ExchangeChangeEntity;
+import com.exchange.entity.ExchangeEntity;
 import com.exchange.exception.ExternalResourceNotFoundException;
-import com.exchange.mapper.ExchangeRateMapper;
-import com.exchange.repository.ExchangeRateRepository;
-import com.exchange.service.ExchangeRateService;
+import com.exchange.mapper.ExchangeMapper;
+import com.exchange.repository.ExchangeRepository;
+import com.exchange.service.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,11 +15,11 @@ import org.springframework.util.ObjectUtils;
 @Component
 public class ExchangeScheduler {
 
-    private final ExchangeRateService exchangeRateService;
+    private final ExchangeService exchangeService;
 
-    private final ExchangeRateMapper exchangeRateMapper;
+    private final ExchangeMapper exchangeRateMapper;
 
-    private final ExchangeRateRepository repository;
+    private final ExchangeRepository repository;
 
     @Value("${exchange.rate.base}")
     private String base;
@@ -28,9 +28,9 @@ public class ExchangeScheduler {
     private String symbol;
 
     @Autowired
-    public ExchangeScheduler(ExchangeRateService exchangeRateService, ExchangeRateMapper exchangeRateMapper,
-                             ExchangeRateRepository repository) {
-        this.exchangeRateService = exchangeRateService;
+    public ExchangeScheduler(ExchangeService exchangeService, ExchangeMapper exchangeRateMapper,
+                             ExchangeRepository repository) {
+        this.exchangeService = exchangeService;
         this.exchangeRateMapper = exchangeRateMapper;
         this.repository = repository;
     }
@@ -44,8 +44,8 @@ public class ExchangeScheduler {
 
     @Scheduled(cron = "${exchange.rate.check.interval}")
     public void scheduleExchangeRate() {
-        ExchangeRateDto exchangeRateDto = exchangeRateService.callExchangeApi(base, symbol);
-        ExchangeChangeEntity entity = exchangeRateMapper.map(exchangeRateDto);
+        ExchangeRateDto exchangeRateDto = exchangeService.callExchangeApi(base, symbol);
+        ExchangeEntity entity = exchangeRateMapper.map(exchangeRateDto);
 
         if (ObjectUtils.isEmpty(entity)) {
             throw new ExternalResourceNotFoundException("External api is down");
