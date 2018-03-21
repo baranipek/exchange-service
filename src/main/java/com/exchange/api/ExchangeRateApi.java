@@ -27,7 +27,8 @@ public class ExchangeRateApi {
     public ResponseEntity<List<ExchangeRateDto>> getExchangeRates(@PathVariable("base") String base,
                                                                   @PathVariable("symbol") String symbol,
                                                                   DateSearchDto searchDto) {
-        return new ResponseEntity<>(exchangeService.getCurrency(base, symbol, searchDto.getStartDate(), searchDto.getEndDate()), HttpStatus.OK);
+        return new ResponseEntity<>(exchangeService.getCurrency(base, symbol,
+                searchDto.getStartDate(), searchDto.getEndDate()), HttpStatus.OK);
     }
 
 

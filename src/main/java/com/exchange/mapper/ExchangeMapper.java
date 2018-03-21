@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 public class ExchangeMapper {
 
     public ExchangeEntity map(ExchangeRateDto exchangeRateDto) {
-
         if (exchangeRateDto == null) {
             return null;
         }

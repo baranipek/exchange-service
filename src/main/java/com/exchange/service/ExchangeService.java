@@ -12,5 +12,4 @@ public interface ExchangeService {
     List<ExchangeRateDto> getCurrency(String base, String symbol, Date startDate, Date endDate);
 
     ExchangeRateDto callExchangeApi(String base, String symbol) throws ExternalResourceNotFoundException;
-
 }

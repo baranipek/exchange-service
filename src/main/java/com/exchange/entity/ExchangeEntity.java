@@ -21,13 +21,16 @@ public class ExchangeEntity {
     @Setter(AccessLevel.PROTECTED)
     private Long id;
 
+    @Column(name = "base")
     private String base;
 
+    @Column(name = "symbol")
     private String symbol;
 
     @Column(name = "rate", precision = 19, scale = 4)
     private BigDecimal rate;
 
+    @Column(name = "created_time")
     private Date createdTime;
 
 }

@@ -19,11 +19,8 @@ import java.util.List;
 public class ExchangeServiceImpl implements ExchangeService {
 
     private final ExchangeClient exchangeRateClient;
-
     private final ExchangeRepository repository;
-
     private final ExchangeMapper mapper;
-
     private final DateHelper dateHelper;
 
     @Autowired
@@ -42,7 +39,6 @@ public class ExchangeServiceImpl implements ExchangeService {
      * @return ExchangeRateDto holds the results
      * @throws ExternalResourceNotFoundException when the external api is down
      */
-
     @Override
     public ExchangeRateDto callExchangeApi(String base, String symbol) throws ExternalResourceNotFoundException {
         return exchangeRateClient.getCurrencyClient(base, symbol);
@@ -56,7 +52,6 @@ public class ExchangeServiceImpl implements ExchangeService {
      * @param endDate   end date of the records that to be queried
      * @return List<ExchangeRateDto> holds the results
      */
-
     @Override
     public List<ExchangeRateDto> getCurrency(String base, String symbol, Date startDate, Date endDate) {
         List<ExchangeEntity> exchangeRateResponse;

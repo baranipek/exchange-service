@@ -9,7 +9,6 @@ import java.util.Date;
 public class DateHelper {
 
     /** Returns the given date with time set to the end of the day */
-
     public Date getEndOfDay(Date date) {
         if (date == null) {
             return null;

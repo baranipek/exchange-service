@@ -16,9 +16,7 @@ import org.springframework.util.ObjectUtils;
 public class ExchangeScheduler {
 
     private final ExchangeService exchangeService;
-
     private final ExchangeMapper exchangeRateMapper;
-
     private final ExchangeRepository repository;
 
     @Value("${exchange.rate.base}")
@@ -35,13 +33,11 @@ public class ExchangeScheduler {
         this.repository = repository;
     }
 
-
     /**
      * This scheduler method calls the http://api.fixer.io/latest external api, with the interval
      * time is given in config file .
      * @throws ExternalResourceNotFoundException when the external api is down
      */
-
     @Scheduled(cron = "${exchange.rate.check.interval}")
     public void scheduleExchangeRate() {
         ExchangeRateDto exchangeRateDto = exchangeService.callExchangeApi(base, symbol);
