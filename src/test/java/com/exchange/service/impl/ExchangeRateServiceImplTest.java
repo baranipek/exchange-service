@@ -1,11 +1,11 @@
 package com.exchange.service.impl;
 
-import com.exchange.client.ExchangeRateClient;
+import com.exchange.client.ExchangeClient;
 import com.exchange.dto.ExchangeRateDto;
-import com.exchange.entity.ExchangeChangeEntity;
+import com.exchange.entity.ExchangeEntity;
 import com.exchange.helper.DateHelper;
-import com.exchange.mapper.ExchangeRateMapper;
-import com.exchange.repository.ExchangeRateRepository;
+import com.exchange.mapper.ExchangeMapper;
+import com.exchange.repository.ExchangeRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,35 +28,35 @@ import static org.mockito.Mockito.when;
 public class ExchangeRateServiceImplTest {
 
     @Mock
-    private ExchangeRateClient exchangeRateClient;
+    private ExchangeClient exchangeRateClient;
 
     @Mock
-    private ExchangeRateRepository repository;
+    private ExchangeRepository repository;
 
     @Spy
-    private ExchangeRateMapper mapper;
+    private ExchangeMapper mapper;
 
     @Mock
     private DateHelper dateHelper;
 
     @InjectMocks
-    private ExchangeRateServiceImpl exchangeRateService;
+    private ExchangeServiceImpl exchangeRateService;
 
     private ExchangeRateDto latestRateDto;
 
-    private ExchangeChangeEntity latestEntity;
+    private ExchangeEntity latestEntity;
 
-    private List<ExchangeChangeEntity> exchangeChangeEntities;
+    private List<ExchangeEntity> exchangeChangeEntities;
 
-    private ExchangeChangeEntity firstEntity;
+    private ExchangeEntity firstEntity;
 
     @Before
     public void setUp() throws Exception {
         latestRateDto = new ExchangeRateDto("EUR", new Date(), "USD", new BigDecimal(1.2));
-        latestEntity = ExchangeChangeEntity.builder().base("EUR").createdTime(new Date()).rate(new BigDecimal(1.2))
+        latestEntity = ExchangeEntity.builder().base("EUR").createdTime(new Date()).rate(new BigDecimal(1.2))
                 .symbol("USD").build();
 
-        firstEntity = ExchangeChangeEntity.builder().base("TL").createdTime(new Date()).rate(new BigDecimal(1.1))
+        firstEntity = ExchangeEntity.builder().base("TL").createdTime(new Date()).rate(new BigDecimal(1.1))
                 .symbol("USD").build();
     }
 

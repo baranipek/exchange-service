@@ -8,11 +8,11 @@ import org.springframework.http.HttpStatus;
 
 
 @Slf4j
-class ExchangeRateClientFallback implements ExchangeRateClient {
+class ExchangeClientFallback implements ExchangeClient {
 
     private final Throwable cause;
 
-    ExchangeRateClientFallback(Throwable cause) {
+    ExchangeClientFallback(Throwable cause) {
         this.cause = cause;
     }
 

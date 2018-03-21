@@ -2,7 +2,7 @@ package com.exchange.api;
 
 import com.exchange.dto.DateSearchDto;
 import com.exchange.dto.ExchangeRateDto;
-import com.exchange.service.ExchangeRateService;
+import com.exchange.service.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +15,11 @@ import java.util.List;
 @RequestMapping("/api/v1/exchange")
 public class ExchangeRateApi {
 
-    private final ExchangeRateService exchangeRateService;
+    private final ExchangeService exchangeService;
 
     @Autowired
-    public ExchangeRateApi(ExchangeRateService exchangeRateService) {
-        this.exchangeRateService = exchangeRateService;
+    public ExchangeRateApi(ExchangeService exchangeService) {
+        this.exchangeService = exchangeService;
     }
 
     @RequestMapping(value = "/{base}/{symbol}", method = RequestMethod.GET)
@@ -27,7 +27,7 @@ public class ExchangeRateApi {
     public ResponseEntity<List<ExchangeRateDto>> getExchangeRates(@PathVariable("base") String base,
                                                                   @PathVariable("symbol") String symbol,
                                                                   DateSearchDto searchDto) {
-        return new ResponseEntity<>(exchangeRateService.getCurrency(base, symbol, searchDto.getStartDate(), searchDto.getEndDate()), HttpStatus.OK);
+        return new ResponseEntity<>(exchangeService.getCurrency(base, symbol, searchDto.getStartDate(), searchDto.getEndDate()), HttpStatus.OK);
     }
 
 

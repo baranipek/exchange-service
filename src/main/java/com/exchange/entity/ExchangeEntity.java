@@ -13,7 +13,7 @@ import java.util.Date;
 @Table(name = "exchange_rates")
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExchangeChangeEntity {
+public class ExchangeEntity {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
 
@@ -25,6 +25,7 @@ public class ExchangeChangeEntity {
 
     private String symbol;
 
+    @Column(name = "rate", precision = 19, scale = 4)
     private BigDecimal rate;
 
     private Date createdTime;

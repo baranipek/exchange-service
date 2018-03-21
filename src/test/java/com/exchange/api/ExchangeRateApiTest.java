@@ -1,7 +1,7 @@
 package com.exchange.api;
 
 import com.exchange.dto.ExchangeRateDto;
-import com.exchange.service.impl.ExchangeRateServiceImpl;
+import com.exchange.service.impl.ExchangeServiceImpl;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class ExchangeRateApiTest {
     private MockMvc mockModelView;
 
     @Mock
-    private ExchangeRateServiceImpl exchangeRateService;
+    private ExchangeServiceImpl exchangeRateService;
 
     private ExchangeRateDto latestRateDto;
 
